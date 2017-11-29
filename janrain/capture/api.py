@@ -146,6 +146,9 @@ class Api(object):
         defaults      - A dictionary of default params to pass to every call.
         compress      - A boolean indicating to use gzip compression.
         sign_requests - A boolean indicating to sign the requests.
+        user_agent    - A string to use for the user agent header.
+        request_timeout - Either an int or a tuple indicating how long to wait
+                          for Janrain to respond to requests.
 
     Example:
         defaults = {'client_id': "...", 'client_secret': "..."}

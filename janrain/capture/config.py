@@ -1,6 +1,8 @@
 """ Utilities for working with the Janrain API configuration file. """
-import yaml
+from collections import MutableMapping
 import os
+import yaml
+
 from janrain.capture.exceptions import JanrainConfigError
 
 def get_settings_at_path(dot_path):
@@ -134,13 +136,12 @@ def read_config_file():
     config = ConfigDict(file, yaml_dict)
     # merge clusters into clients
     if 'clusters' in config and 'clients' in config:
-        for client in config['clients'].itervalues():
+        for client in config['clients'].values():
             if 'cluster' in client:
-                for key, value in config['clusters'][client['cluster']].iteritems():
+                for key, value in config['clusters'][client['cluster']].items():
                     client.setdefault(key, value)
     return config
 
-from collections import MutableMapping
 
 class ConfigDict(MutableMapping):
     def __init__(self, file, values={ }, root = ''):
